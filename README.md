@@ -16,7 +16,7 @@ For bulk semiconductors, the emitted energy is much smaller (larger wavelengths)
 
 **Fig. 2**: [Engineered Nanomaterials and Their Properties: A Review](https://bbrc.in/engineered-nanomaterials-and-their-properties-a-review-2/), Bioscience Biotechnology Research Communications, accessed May 7, 2025.
 </div>
-In this experiment, we use the particle-in-1D-box model (Fig. 3) to simplify the calculations of the QDs size. We treat the QDs diameter as the box length for the derivation of energy from the Schrödinger Equation, and while the energy of the box can be calculated with measured UV-Vis absorbed or Fluorescence emitted wavelengths, the diameter can be estimated.
+In this experiment, we use the particle-in-3D-box model (Fig. 3) to simplify the calculations of the QDs size. We treat the QDs radius as the box length for the derivation of energy from the Schrödinger Equation, and while the energy of the box can be calculated with measured UV-Vis absorbed or Fluorescence emitted wavelengths, the radius can be estimated.
 
 <div align="center">
   
@@ -33,34 +33,32 @@ The Band Theory used to explain the color change in nanomaterials for this exper
 ### a. Synthesis
 Selenium was dissolved in 1-octadecene, with trioctylphosphine being added as a ligand. Se solution was then combined with reaction solution containing proportionate amounts of CdO, oleic acid, and octadecene that had just been heated to 225 degrees Celsius. Ater that, Pasteur pipet was used to rapidly remove approximately 1 mL samples at frequent intervals. 9 CdSe quantum dot samples were successfully collected. Some samples were removed for their unreliable UV-Vis and/or Fluorescence values. Refer to [A Safer, Easier, Faster Synthesis for CdSe Quantum Dot Nanocrystals](https://doi.org/10.1021/ed082p1697) (Boatman and Lisensky, 2005) for further details about the synthesis conditions. 
 ### b. Characterizations
-UV-Vis and fluorescence measurements were performed on all samples to estimate the quantum dots' diameter value. The excited wavelength for fluorescence is 360 nm. Data were cleaned, processed, and analyzed with Python to generate visualizations.
+UV-Vis and fluorescence measurements were performed on all samples to estimate the quantum dots' radius value. The excited wavelength for fluorescence is 360 nm. Data were cleaned, processed, and analyzed with Python to generate visualizations.
 
 ## III. Radius calculations
+### A. Overview
 Quantum dots are treated as a particle in a box, so their energy is calculated based on this model. For UV-Vis, Brus equation (Quantum confinement effect) is used as the absorbance is directly related to QDs band gap energy, which is obtained by adding the band gap energy of CdSe bulk materials and particle-in-a-box energies of electron and hole. In the Brus equation, Column interaction is also considered, so the effective masses of the electron and hole are used, and the binding exciton energy is taken into account. 
 For Fluorescence, emission energy is estimated by adding the ground state energy of CdSe with the particle-in-a-box energies of the free electron and hole. Fluorescence model is  simpler and open compared to the UV-Vis model. Below is the detailed derivation  of the two equations.
-### A. Overview
-This document derives two approaches to calculate the radius of a semiconductor quantum dot: the **Brus equation** using UV-Vis absorbance data (including the Coulomb interaction term) and a simplified **fluorescence equation** using emission energy (neglecting the Coulomb term). Both derivations build on the particle-in-a-box model. For the fluorescence approach, we use the free electron mass for both the electron and hole (denoted \( m_e \) and \( m_h \), where \( m_e = m_h = 9.11 \times 10^{-31} \, \text{kg} \)), ignoring lattice effects typically accounted for by effective masses. We explain why neglecting the Coulomb term is a reasonable approximation in this context. A comparison of the two approaches is provided at the end.
-### B. Particle in a Box: Energy Quantization
-For a particle confined in a 1D cubic box with side length L and infinite potential barriers, the Schrödinger equation yields quantized energy levels. The wavefunction is:
+### B. Energy Quantization as a Particle in a Box
+For a particle of mass m confined in a 3D cubic box with side length $L$ and infinite potential barriers, the time-independent Schrödinger equation is solved with boundary conditions that the wavefunction $\psi = 0$ at the box boundaries.
 
-$$ \psi(x, y, z) = \left( \frac{2}{L} \right)^{1/2} \sin\left( \frac{n_x \pi x}{L} \right) $$
+The wavefunction is:
 
-where n is quantum numbers.
+$$ \psi(x, y, z) = \left( \frac{2}{L} \right)^{3/2} \sin\left( \frac{n_x \pi x}{L} \right) \sin\left( \frac{n_y \pi y}{L} \right) \sin\left( \frac{n_z \pi z}{L} \right) $$
 
-The energy is:
+where $n_x, n_y, n_z = 1, 2, 3, \ldots$ are quantum numbers.
 
-$$ E = \frac{\hbar^2 \pi^2}{2 m L^2} (n^2) $$
+The quantized energy levels are obtained by solving the Schrödinger equation:
 
-For the ground state (n = 1):
+$$ E = \frac{\hbar^2 \pi^2}{2 m L^2} (n_x^2 + n_y^2 + n_z^2) $$
 
-$$ E = \frac{ \hbar^2 \pi^2}{2 m L^2} $$
+For the ground state ($n_x = n_y = n_z = 1$):
 
-### C. Quantum Dot as a Spherical Box
-A quantum dot is approximated as a spherical potential well with radius r. Solving the Schrödinger equation in spherical coordinates (with infinite barriers) gives the ground state energy for a particle of mass \( m \), with this conversion: $\hbar^2=\frac{h^2}{4\pi^2}$
+$$ E = \frac{3 \hbar^2 \pi^2}{2 m L^2} $$
 
-$$ E \approx \frac{h^2 \pi^2}{8 m r^2} $$
-
-This is the confinement energy for a single particle, where r is the radius of the quantum dot.
+### C. Energy Quantization as a Spherical Box (quantum dots)
+Above equation is an energy quantization of a typical 3D cubic box model. However, for the quantum dot, we model it as a spherical 3D box with radius r, not a cube. The spherical shape has a different geometry, and the energy is calculated using spherical coordinates. Because of this symmetry, the ground state energy simplifies to $\frac{\hbar^2 \pi^2}{2 m r^2}$ for each particle, without the factor of 3. This form looks similar to a 1D box energy, but it’s still a 3D system—it’s just that the spherical shape combines the effects of all three dimensions into a single radial term.
+This difference arises because the spherical model doesn’t separate into three independent directions like a cube; instead, it treats confinement radially, leading to a simpler energy expression for the ground state. We use the spherical model because quantum dots are often nearly spherical in shape, making this a better approximation for their behavior.
 
 ### D. Confinement Energy
 - Electron confinement energy:
@@ -69,28 +67,21 @@ This is the confinement energy for a single particle, where r is the radius of t
   $$E_h = \frac{\hbar^2 \pi^2}{2 m_h r^2}$$
 - Total confinement energy:
   $$E_{\text{confinement}} = \frac{\hbar^2 \pi^2}{2 r^2} \left( \frac{1}{m_e} + \frac{1}{m_h} \right)$$
+With $\hbar^2=\frac{h^2}{4\pi^2}$:
+  $$E_{\text{confinement}} = \frac{h^2 \pi^2}{8 r^2} \left( \frac{1}{m_e} + \frac{1}{m_h} \right)$$
 
-### E. Comparison of Fluorescence and Brus Equation Approaches
+### E. Assumptions and Limitations
+- **Neglecting Coulomb Interaction (Fluorescence)**: The Coulomb interaction is significant in quantum dots, especially for small sizes. Omitting it underestimates the radius, but the Stokes shift in emission partially compensates for this.
+- **Infinite Potential Barriers**: Assumes electrons and holes cannot escape the quantum dot, which overestimates confinement for small dots.
+- **Spherical Approximation**: Assumes a perfectly spherical quantum dot, which may not hold for real systems.
+- **Stokes Shift Variability (Fluorescence)**: The Stokes shift depends on material, size, and surface quality, introducing variability in the accuracy of neglecting the Coulomb term.
+- **Free Mass Approximation (Fluorescence)**: Using free masses instead of effective masses underestimates confinement effects, as effective masses in semiconductors are typically smaller than the free electron mass.
+
+### F. Comparison of Fluorescence and Brus Equation Approaches
 | **Aspect**               | **Fluorescence Approach**                                      | **Brus Equation Approach (UV-Vis)**                           |
 |--------------------------|---------------------------------------------------------------|-------------------------------------------------------------|
-| **Measurement**          | Uses emission energy $E_{\text{emission}} = \frac{h c}{\lambda_{\text{max}}}$ from fluorescence. | Uses absorption energy $E_g^{\text{nano}}$ from UV-Vis absorbance. |
-| **Coulomb Term**         | Neglected, justified by Stokes shift and free mass approximation. | Included (\( -\frac{1.8 e^2}{4 \pi \epsilon_0 \epsilon r} \)), critical for accuracy. |
-| **Masses Used**          | Free masses $m_e = m_h$, ignoring lattice effects.      | Uses effective masses ($m_e^*$, $m_h^*$), material-specific. |
-| **Equation**             | $$r = \sqrt{\frac{h^2}{4 m_e \left( \frac{h c}{\lambda_{\text{max}}} - E_g \right)}}$$ | $$\frac{h^2}{8 r^2} \left( \frac{1}{m_e^*} + \frac{1}{m_h^*} \right) - \frac{1.8 e^2}{4 \pi \epsilon_0 \epsilon r} + (E_g^{\text{bulk}} - E_g^{\text{nano}}) = 0$$ |
-| **Complexity**           | Simpler, linear in \( 1/r^2 \), analytical solution.          | More complex, nonlinear due to \( 1/r \) term, often requires numerical solution for \( r \). |
-| **Accuracy**             | Less accurate due to neglected Coulomb term and free masses, but Stokes shift compensates somewhat. | More accurate, as it includes Coulomb interaction and uses effective masses. |
-| **Use Case**             | Quick estimate using fluorescence data, simplified model.     | Precise calculation using absorbance data, standard in literature. |
-
-### E. Conclusion
-The Brus equation for UV-Vis absorbance is:
-
-$$\frac{h^2}{8 r^2} \left( \frac{1}{m_e^*} + \frac{1}{m_h^*} \right) - \frac{1.8 e^2}{4 \pi \epsilon_0 \epsilon r} + (E_g^{\text{bulk}} - E_g^{\text{nano}}) = 0$$
-
-The fluorescence equation, using free masses, is:
-
-$$r = \sqrt{\frac{h^2}{4 m_e \left( \frac{h c}{\lambda_{\text{max}}} - E_g \right)}}$$
-
-Both equations use a denominator of 8 in the confinement term when written in the standard form (\( \frac{h^2}{8 r^2} \left( \frac{1}{m_e} + \frac{1}{m_h} \right) \)). The fluorescence approach neglects the Coulomb term, simplifying the calculation, and is justified by the Stokes shift and the use of free masses, which ignore lattice effects like dielectric screening. The Brus equation is more accurate for precise calculations, as shown in the comparison table.
-
-
-
+| **Measurement**          | Uses emission energy $E_{\text{emission}} = \frac{h c}{\lambda_{\text{max}}}$ from fluorescence. | Uses absorption energy $E_g^{\text{nano}} = \frac{h c}{\lambda_{\text{threshold}}}$ from UV-Vis absorbance. |
+| **Coulomb Interaction**         | Neglected, justified by Stokes shift and free mass approximation. | Included $-\frac{1.8 e^2}{4 \pi \epsilon_0 \epsilon r}$, critical for accuracy. |
+| **Masses Used**          | Free mass of electron $m_e$ and hole $m_h$      | Effective masses of $m_e^* m_0$ and hole $m_h^* m_0$, where $m_e^*  and  m_h^*$ are unitless and material-specific, and $m_o$ is the electron's mass in free space.|
+| **Equation**             | $$E_{\text{emission}} = E_{\text{ground}} + \frac{h^2 \pi^2}{8 R^2} \left( \frac{1}{m_e^* m_0} + \frac{1}{m_h^* m_0} \right)$$  | $$E_g^{\text{nano}} = E_g^{\text{bulk}} + \frac{h^2 \pi^2}{8 R^2} \left( \frac{1}{m_e} + \frac{1}{m_h} \right) - \frac{1.8 e^2}{4 \pi \epsilon_0 \epsilon R}$$ |
+| **Accuracy**             | Less accurate due to neglected Coulomb interaction and free masses, but Stokes shift might compensate to some extend. | More accurate, as it includes Coulomb interaction and uses effective masses. |
