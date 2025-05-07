@@ -31,12 +31,11 @@ The Band Theory used to explain the color change in nanomaterials for this exper
 
 ### II. General procedures: 
 #### a. Synthesis
-Selenium was dissolved in 1-octadecene, with trioctylphosphine being added as ligand. Se solution was then combined with reaction solution containing proportionate amounts of CdO, oleic acid, and octadecene that was just heated to 225 degree Celcius. Ater that, Pasteur pipet was used to rapidly remove approximately 1 mL samples at frequent intervals. 9 CdSe quantum dots samples were sucessfually collected.
+Selenium was dissolved in 1-octadecene, with trioctylphosphine being added as a ligand. Se solution was then combined with reaction solution containing proportionate amounts of CdO, oleic acid, and octadecene that had just been heated to 225 degrees Celsius. Ater that, Pasteur pipet was used to rapidly remove approximately 1 mL samples at frequent intervals. 9 CdSe quantum dot samples were successfully collected. Some samples were removed for their unreliable UV-Vis and/or Fluorescence values. Refer to [A Safer, Easier, Faster Synthesis for CdSe Quantum Dot Nanocrystals](https://doi.org/10.1021/ed082p1697) (Boatman and Lisensky, 2005) for further details about the synthesis conditions. 
 #### b. Characterizations
-UV-Vis and fluorescence measurements were performed on all samples to estimate the quantum dots' diameter value. The excited wavelength for fluorescence is 360 nm.
-
-**Data of the first sample were not included in the analysis for its experimental error.
-### III. Diameters calculations: 
-Quantum dots are treated as a particle in a box so its energy is calculated based on this model. For UV-Vis, Brus equation (Quantum confinement effect) is used as the absorbance is directly related to QDs band gap energy, which is obtained by adding the band gap energy of CdSe bulk materials and particle-in-a-box energies of electron and hole. In Brus equation, Column interaction is also considered so effective masses of electron and hole are used and binding exciton energy is taken into account. For Fluorescence, emission energy is estimated by adding the ground state energy of CdSe with particle-in-a-box energies of free electron and hole. Fluorescence model is much more simplified and open compared to UV-Vis model.
+UV-Vis and fluorescence measurements were performed on all samples to estimate the quantum dots' diameter value. The excited wavelength for fluorescence is 360 nm. Data were cleaned, processed, and analyzed with Python to generate visualizations.
+### III. Diameter calculations: 
+Quantum dots are treated as a particle in a box, so their energy is calculated based on this model. For UV-Vis, Brus equation (Quantum confinement effect) is used as the absorbance is directly related to QDs band gap energy, which is obtained by adding the band gap energy of CdSe bulk materials and particle-in-a-box energies of electron and hole. In the Brus equation, Column interaction is also considered, so the effective masses of the electron and hole are used, and the binding exciton energy is taken into account. 
+For Fluorescence, emission energy is estimated by adding the ground state energy of CdSe with the particle-in-a-box energies of the free electron and hole. Fluorescence model is  simpler and open compared to the UV-Vis model.
 ### IV. Mathematical Models:
 Relevant parameters that affect the synthesis process, such as reaction time, instantaneous temperature, and its rising time, are studied to generate models to predict UV absorbed wavelength. 
